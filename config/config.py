@@ -45,3 +45,20 @@ def get_fetch_interval():
     global config
     fetch_interval = config.get('general').get('fetch_interval')
     return fetch_interval
+
+
+def get_token():
+    token = config.get('discord').get('token')
+    return token
+
+
+def get_command_prefix():
+    global config
+    prefix = config.get('discord').get('command_prefix')
+    return prefix
+
+
+def get_channel_id():
+    global config
+    channel_id = config.get('discord').get('channel')
+    return channel_id
