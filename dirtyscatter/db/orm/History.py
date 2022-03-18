@@ -1,6 +1,6 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, select
 
-from db import Base, Session
+from dirtyscatter.db import Base, Session
 
 
 class History(Base):
@@ -21,3 +21,9 @@ def insert_histories(histories):
     with Session() as session:
         session.add_all(histories)
         session.commit()
+
+
+def get_after_timestamp(timestamp):
+    with Session() as session:
+        stmt = select(History).where(History.timestamp > timestamp)
+        return session.execute(stmt).scalars().all()

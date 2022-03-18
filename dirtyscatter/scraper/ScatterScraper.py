@@ -1,6 +1,6 @@
-from config import config
-from db.orm import User, UserHistory
-from scraper.ChromeBrowser import ChromeBrowser
+from dirtyscatter.config import config
+from dirtyscatter.db.orm import User, History
+from dirtyscatter.scraper.ChromeBrowser import ChromeBrowser
 from time import sleep
 import time
 
@@ -65,10 +65,10 @@ def fetch_to_db():
         old_user = User.get_user_by_name(user.name)
         if old_user:
             if user.scatter > old_user.scatter:
-                histories.append(UserHistory.History(name=user.name, timestamp=int(time.time()), scatter=user.scatter))
+                histories.append(History.History(name=user.name, timestamp=int(time.time()), scatter=user.scatter))
                 changed_users.append(user)
         else:
             changed_users.append(user)
     # Write diff to db
     User.update_all(changed_users, insert=True)
-    UserHistory.insert_histories(histories)
+    History.insert_histories(histories)

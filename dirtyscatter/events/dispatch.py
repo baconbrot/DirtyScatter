@@ -1,14 +1,16 @@
-from events import handlers
-from events.eventType import EventType
+from dirtyscatter.events import handlers
+from dirtyscatter.events.eventType import EventType
 
 
 _listeners = {}
 
 
 async def trigger(event_type: EventType, *args):
-    if event_type == EventType.VOICE_STATE_UPDATE:
+    try:
         for task in _listeners.get(event_type.value):
-             await task(*args)
+            await task(*args)
+    except:
+        print(f'No handler for {event_type}')
 
 
 def register(event_type: EventType):

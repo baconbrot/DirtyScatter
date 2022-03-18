@@ -1,6 +1,6 @@
-from sqlalchemy import Column, String, Integer, select, update, insert, delete
+from sqlalchemy import Column, String, Integer, select, update
 
-from db import Base, Session
+from dirtyscatter.db import Base, Session
 
 
 class User(Base):
