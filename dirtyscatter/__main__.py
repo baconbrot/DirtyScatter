@@ -1,0 +1,1 @@
+from dirtyscatter import main
