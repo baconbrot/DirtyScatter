@@ -7,7 +7,7 @@ from dirtyscatter.config import config
 from dirtyscatter.events import dispatch
 from dirtyscatter.events.eventType import EventType
 from dirtyscatter.graphs.leaderboard import generate_plot
-
+from dirtyscatter import db
 @bot.event
 async def on_ready():
     await dispatch.trigger(EventType.READY)
