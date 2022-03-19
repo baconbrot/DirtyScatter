@@ -35,3 +35,9 @@ def update_all(users, insert=False):
 def get_user_by_name(name):
     with Session() as session:
         return session.get(User, name)
+
+
+def get_top(number):
+    with Session() as session:
+        stmt = select(User).order_by(User.rank).limit(number)
+        return session.execute(stmt).scalars().all()

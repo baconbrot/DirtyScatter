@@ -1,4 +1,4 @@
-output.png
+*.png
 db.db
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm+all,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm+all,python
