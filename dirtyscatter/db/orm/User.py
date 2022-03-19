@@ -14,7 +14,7 @@ class User(Base):
 def get_all():
     with Session() as session:
         stmt = select(User)
-        return session.execute(stmt).all()
+        return session.execute(stmt).scalars().all()
 
 
 def update_user(user, insert=False):
