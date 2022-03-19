@@ -62,3 +62,9 @@ def get_channel_id():
     global config
     channel_id = config.get('discord').get('channel')
     return channel_id
+
+
+def get_chromedriver_path():
+    global config
+    path = config.get('chrome').get('driver_path')
+    return path

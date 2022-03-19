@@ -55,7 +55,8 @@ def fetch_to_db():
     scatter_scraper = ScatterScraper(config.get_leaderboard_url(),
                                      config.get_table_body_x(),
                                      config.get_next_page_btn_x(),
-                                     config.get_total_display_count_x())
+                                     config.get_total_display_count_x(),
+                                     config.get_chromedriver_path())
     users = [User.User(name=name, rank=int(rank), scatter=int(scatter)) for rank, name, scatter in
              scatter_scraper.get_all_current_user()]
     # Check for changes
