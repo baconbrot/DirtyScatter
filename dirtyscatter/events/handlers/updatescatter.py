@@ -19,7 +19,7 @@ async def send_plot(file):
         await channel.send(file=picture)
 
 
-@tasks.loop(seconds=10)#config.get_fetch_interval())
+@tasks.loop(seconds=config.get_fetch_interval())
 async def send_plots():
     fetch_to_db()
     await clear_channel(config.get_channel_id())
