@@ -18,7 +18,7 @@ class ScatterScraper:
     def get_all_current_user(self):
         with self.browser as session:
             session.get(self.leaderboard_url)
-            sleep(2)
+            sleep(config.get_loading_time())
             return self.__extract_all_current_user(session)
 
     def __is_last_page(self, session):
@@ -33,7 +33,7 @@ class ScatterScraper:
             return False
         next__page_btn = session.find_elements_by_xpath(self.next_page_button_x_path)[0]
         next__page_btn.click()
-        sleep(0.4)
+        sleep(config.get_interaction_time())
         return True
 
     def __extract_page(self, session):

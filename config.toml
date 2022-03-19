@@ -13,6 +13,8 @@ path=""
 [chrome]
 headleass=true
 driver_path=""
+loading_time=
+interaction_time=
 
 [scraper]
 leaderboard_url=""

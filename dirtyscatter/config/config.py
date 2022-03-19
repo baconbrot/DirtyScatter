@@ -68,3 +68,15 @@ def get_chromedriver_path():
     global config
     path = config.get('chrome').get('driver_path')
     return path
+
+
+def get_loading_time():
+    global config
+    lt = config.get('chrome').get('loading_time')
+    return lt
+
+
+def get_interaction_time():
+    global config
+    it = config.get('chrome').get('interaction_time')
+    return it
