@@ -3,6 +3,9 @@ from dirtyscatter.db.orm import User, History
 from dirtyscatter.scraper.ChromeBrowser import ChromeBrowser
 from time import sleep
 import time
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class ScatterScraper:
@@ -59,6 +62,9 @@ def fetch_to_db():
                                      config.get_chromedriver_path())
     users = [User.User(name=name, rank=int(rank), scatter=int(scatter)) for rank, name, scatter in
              scatter_scraper.get_all_current_user()]
+    log.debug(f'Fetched {len(users)} users')
+    if len(users) == 0:
+        log.warning(f'Fetched 0 users. Maybe there is an Error')
     # Check for changes
     histories = []
     changed_users = []
@@ -72,4 +78,5 @@ def fetch_to_db():
             changed_users.append(user)
     # Write diff to db
     User.update_all(changed_users, insert=True)
+    log.debug(f'Commited {len(users)} users to database')
     History.insert_histories(histories)

@@ -1,3 +1,4 @@
+import logging
 import math
 
 import numpy as np
@@ -8,6 +9,7 @@ from dirtyscatter.db.orm import User, History
 import datetime as dt
 
 plt.xticks(rotation=25)
+log = logging.getLogger(__name__)
 
 def generate_plot():
     #plt.style.use('dark_background')
@@ -39,5 +41,6 @@ def generate_plot():
     ax.xaxis.set_major_formatter(xfmt)
     ax.legend(fontsize=7, labelspacing=0.15, bbox_to_anchor=(1, 1), ncol=2)
     plt.savefig("output.png", bbox_inches="tight")
+    log.debug(f'Saved leadboard-graph to output.png')
     plt.close(fig)
     return "output.png"
