@@ -8,6 +8,7 @@ from dirtyscatter.db.orm import User, History
 import datetime as dt
 
 plt.xticks(rotation=25)
+
 def generate_plot():
     #plt.style.use('dark_background')
     fig, ax = plt.subplots()
@@ -26,7 +27,8 @@ def generate_plot():
     if len(user_histories.keys()) == 0:
         top_users = User.get_top(10)
         for user in top_users:
-            user_histories[user.name] = [History.History(name=user.name, scatter=user.scatter, timestamp=int(time())-1000), History.History(name=user.name, scatter=user.scatter, timestamp=int(time()))]
+            user_histories[user.name] = [History.History(name=user.name, scatter=user.scatter, timestamp=int(time())-1000),
+                                         History.History(name=user.name, scatter=user.scatter, timestamp=int(time()))]
     for user in user_histories.keys():
         user_history = user_histories[user]
         x = [dt.datetime.fromtimestamp(history.timestamp) for history in user_history]
@@ -37,4 +39,5 @@ def generate_plot():
     ax.xaxis.set_major_formatter(xfmt)
     ax.legend(fontsize=7, labelspacing=0.15, bbox_to_anchor=(1, 1), ncol=2)
     plt.savefig("output.png", bbox_inches="tight")
+    plt.close(fig)
     return "output.png"

@@ -12,4 +12,5 @@ def generate_plot():
     for user in top_users:
         ax.bar(user.name, user.scatter, width=0.5)
     plt.savefig("top.png", bbox_inches="tight")
+    plt.close(fig)
     return "top.png"

@@ -15,6 +15,7 @@ headleass=true
 driver_path=""
 loading_time=
 interaction_time=
+use_virtual_display=
 
 [scraper]
 leaderboard_url=""

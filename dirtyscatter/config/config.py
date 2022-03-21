@@ -80,3 +80,10 @@ def get_interaction_time():
     global config
     it = config.get('chrome').get('interaction_time')
     return it
+
+
+def get_use_virtual_display():
+    global config
+    yes = config.get('chrome').get('use_virtual_display')
+    return yes
+

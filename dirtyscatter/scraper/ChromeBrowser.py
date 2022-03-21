@@ -2,7 +2,11 @@ from selenium.webdriver.chrome.options import Options
 
 from selenium import webdriver
 from time import sleep
+from pyvirtualdisplay import Display
+from dirtyscatter.config import config
 
+if config.get_use_virtual_display():
+    display = Display(visible=False, size=(600,400))
 
 class ChromeBrowser:
 
@@ -10,6 +14,7 @@ class ChromeBrowser:
         self.driver_location = driver_location
         self.headless = headless
         self.driver = None
+
 
     def __enter__(self):
         chrome_options = Options()
