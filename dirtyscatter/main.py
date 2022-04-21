@@ -10,6 +10,7 @@ from dirtyscatter.events.eventType import EventType
 from dirtyscatter.graphs import leaderboard, top
 from dirtyscatter import db
 
+
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
@@ -17,7 +18,6 @@ logging.basicConfig(level=logging.DEBUG)
 async def on_ready():
     await dispatch.trigger(EventType.READY)
 
-#top.generate_plot()
 bot.run(config.get_token())
 
 
