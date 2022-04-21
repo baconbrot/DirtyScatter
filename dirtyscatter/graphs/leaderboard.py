@@ -33,7 +33,7 @@ def generate_plot():
     xfmt = md.DateFormatter('%d.%m')
     ax.set_ylabel('Scatter')
     ax.xaxis.set_major_formatter(xfmt)
-    ax.legend(fontsize=7, labelspacing=0.15, bbox_to_anchor=(1, 1), ncol=1)
+    ax.legend(fontsize=7, labelspacing=0.15, bbox_to_anchor=(1, 1), ncol=2)
     plt.savefig("output.png", bbox_inches="tight", edgecolor='none')
     log.debug(f'Saved leadboard-graph to output.png')
     plt.close(fig)
