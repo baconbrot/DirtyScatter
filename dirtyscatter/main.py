@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.DEBUG)
 async def on_ready():
     await dispatch.trigger(EventType.READY)
 
-top.generate_plot()
+#top.generate_plot()
 bot.run(config.get_token())
 
 

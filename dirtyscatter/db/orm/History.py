@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, select, desc
+from sqlalchemy import Column, String, Integer, select, desc, asc
 
 from dirtyscatter.db import Base, Session
 
@@ -31,5 +31,5 @@ def get_after_timestamp(timestamp):
 
 def get_oldest():
     with Session() as session:
-        stmt = select(History).order_by(desc(History.timestamp)).limit(1)
+        stmt = select(History).order_by(asc(History.timestamp)).limit(1)
         return session.execute(stmt).scalars().all()

@@ -29,10 +29,11 @@ def generate_plot():
     if len(user_histories.keys()) == 0:
         top_users = User.get_top(10)
         for user in top_users:
-            user_histories[user.name] = [History.History(name=user.name, scatter=user.scatter, timestamp=int(time())-1000),
+            user_histories[user.name] = [History.History(name=user.name, scatter=user.scatter, timestamp=int(time())),
                                          History.History(name=user.name, scatter=user.scatter, timestamp=int(time()))]
     for user in user_histories.keys():
         user_history = user_histories[user]
+        user_history.append(History.History(name=user, scatter=user_history[-1].scatter, timestamp=int(time())))
         x = [dt.datetime.fromtimestamp(history.timestamp) for history in user_history]
         y = [history.scatter for history in user_history]
         ax.step(x, y, where='post', label=f'{user}')

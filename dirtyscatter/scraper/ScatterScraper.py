@@ -62,20 +62,18 @@ def fetch_to_db():
                                      config.get_chromedriver_path())
     users = [User.User(name=name, rank=int(rank), scatter=int(scatter)) for rank, name, scatter in
              scatter_scraper.get_all_current_user()]
-    log.debug(f'Fetched {len(users)} users')
+    log.info(f'Fetched {len(users)} users')
     if len(users) == 0:
         log.warning(f'Fetched 0 users. Maybe there is an Error')
-    # Check for changes
+    # Holds all new scatter readings with timestamp
     histories = []
+    # Holds all changed user readings with rank
     changed_users = []
     for user in users:
         old_user = User.get_user_by_name(user.name)
-        if old_user:
-            if user.scatter > old_user.scatter:
-                histories.append(History.History(name=user.name, timestamp=int(time.time()), scatter=user.scatter))
-                changed_users.append(user)
-        else:
-            changed_users.append(user)
+        if old_user and user.scatter != old_user.scatter:
+            histories.append(History.History(name=user.name, timestamp=int(time.time()), scatter=user.scatter))
+        changed_users.append(user)
     # Write diff to db
     User.update_all(changed_users, insert=True)
     log.debug(f'Commited {len(users)} users to database')
