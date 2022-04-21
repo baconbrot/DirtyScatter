@@ -12,7 +12,7 @@ from dirtyscatter import db
 
 
 log = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 @bot.event
 async def on_ready():

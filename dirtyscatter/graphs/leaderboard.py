@@ -24,22 +24,17 @@ def generate_plot():
         except KeyError:
             user_histories[user_history.name] = [user_history]
     # Add user graph to plot
-    for user in User.get_all()[:32]:
-        name = user.name
-        user_history = []
-        try:
-            user_history = user_histories[name]
-        except KeyError:
-            History.insert_history(History.History(name=name, scatter=user.scatter, timestamp=int(time())))
-        user_history.append(History.History(name=name, scatter=user.scatter, timestamp=int(time()+1)))
+    for user in user_histories.keys():
+        user_history = user_histories[user]
+        user_history.append(History.History(name=user, scatter=user_history[-1].scatter, timestamp=int(time())))
         x = [dt.datetime.fromtimestamp(history.timestamp) for history in user_history]
         y = [history.scatter for history in user_history]
-        ax.step(x, y, where='post', label=f'{user.name}')
+        ax.step(x, y, where='post', label=f'{user}')
     xfmt = md.DateFormatter('%d.%m')
     ax.set_ylabel('Scatter')
     ax.xaxis.set_major_formatter(xfmt)
     ax.legend(fontsize=7, labelspacing=0.15, bbox_to_anchor=(1, 1), ncol=1)
-    plt.savefig("output.png", bbox_inches="tight")
+    plt.savefig("output.png", bbox_inches="tight", edgecolor='none')
     log.debug(f'Saved leadboard-graph to output.png')
     plt.close(fig)
     return "output.png"
