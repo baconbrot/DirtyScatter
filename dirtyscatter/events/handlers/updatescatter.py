@@ -22,10 +22,11 @@ async def send_plot(file):
 @tasks.loop(seconds=config.get_fetch_interval())
 async def send_plots():
     fetch_to_db()
+    lb = leaderboard.generate_plot()
+    tp = top.generate_plot()
     await clear_channel(config.get_channel_id())
-    leaderboard.generate_plot()
-    await send_plot(leaderboard.generate_plot())
-    await send_plot(top.generate_plot())
+    await send_plot(lb)
+    await send_plot(tp)
 
 
 @register(EventType.READY)

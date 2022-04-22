@@ -37,4 +37,4 @@ def generate_plot():
     plt.savefig("output.png", bbox_inches="tight", edgecolor='none')
     log.debug(f'Saved leadboard-graph to output.png')
     plt.close(fig)
-    return "output.png"
+    return "leaderboard.png"
